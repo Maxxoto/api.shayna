@@ -231,31 +231,31 @@
 
 <script>
     jQuery(document).ready(function($){
-        $('#mymodal').on('show.modal', function(e){
+        $('#mymodal').on('shown.bs.modal', function(e){
             var button = $(e.relatedTarget)
             var modal = $(this)
             modal.find('.modal-body').load(button.data("remote"))
-            modal.find('.modal-title').load(button.data("title"))
+            modal.find('.modal-title').html(button.data("title"))
         })
     });
 </script>
 
-<div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+<div class="modal" id="mymodal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
+                <h5 class="modal-title"></h5>
             </div>
             <div class="modal-body">
-                <p>Modal body text goes here.</p>
+                <i class="fa fa-spinner fa-spin"></i>
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <button type="button" class="btn btn-primary">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

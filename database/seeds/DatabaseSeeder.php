@@ -12,12 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // DB::table('users')->insert([
-        //     'email' => 'ahmatdanis24@gmail.com',
-        //     'name' => 'dani',
-        //     'password' => bcrypt('12345678'),
+        DB::table('users')->insert([
+            'email' => 'ahmatdanis24@gmail.com',
+            'name' => 'dani',
+            'password' => bcrypt('12345678'),
 
-        // ]);
+        ]);
 
         DB::table('products')->insert([
             'name' => 'Unikelo',
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         DB::table('transactions')->insert([
-            'user_id' => '2',
+            'user_id' => '1',
             'name' => 'TRX001',
             'email' => 'zuhad123@gmail.com',
             'number' => '085031239492',
@@ -38,22 +38,17 @@ class DatabaseSeeder extends Seeder
             'transaction_status' => 'PENDING'
         ]);
         DB::table('transactions')->insert([
-            'user_id' => '2',
-            'name' => 'TRX001',
+            'user_id' => '1',
+            'name' => 'TRX002',
             'email' => 'zuhad@gmail.com',
             'number' => '085031239492',
             'address' => 'Jl.karangan 4/28 Surabaya',
             'transaction_total' => '100000',
             'transaction_status' => 'FAILED'
         ]);
-        DB::table('transactions')->insert([
-            'user_id' => '2',
-            'name' => 'TRX001',
-            'email' => 'atika@gmail.com',
-            'number' => '085031239492',
-            'address' => 'Jl.karangan 4/28 Surabaya',
-            'transaction_total' => '100000',
-            'transaction_status' => 'SUCCESS'
+        DB::table('transaction_details')->insert([
+            'transactions_id' => '1' ,
+            'products_id' => '1'
         ]);
     }
 }

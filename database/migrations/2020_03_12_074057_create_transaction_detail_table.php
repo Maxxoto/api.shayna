@@ -13,10 +13,11 @@ class CreateTransactionDetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaction_detail', function (Blueprint $table) {
+        Schema::create('transaction_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('transactions_id')->foreign('transactions_id')->reference('id')->on('transaction');
             $table->unsignedBigInteger('products_id')->foreign('products_id')->reference('id')->on('products');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
