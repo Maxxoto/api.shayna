@@ -56,7 +56,11 @@ class TransactionController extends Controller
      */
     public function show(Transaction $transaction)
     {
-        //
+        $item = Transaction::with('details.product')->findOrFail($id);
+
+        return view('pages.transactions.show')->with([
+            'item' => $item
+        ]);
     }
 
     /**
@@ -88,8 +92,11 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id)
     {
-        //
+        $transaction = Transaction::findOrFail($id);
+        $transaction->delete();
+
+        return redirect()->route('transactions.index')->with('status-success','Berhasil menghapus data transaksi : '.$transaction->name);
     }
 }
