@@ -69,9 +69,13 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id)
     {
-        //
+        $data = Transaction::findOrFail($id);
+
+        return view('pages.transactions.edit')->with([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -81,9 +85,16 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+        $item = Transaction::findOrFail($id);
+        $item->update($data);
+
+        return redirect()->route('transactions.index')->with('status-success','Berhasil menghapus data transaksi : '.$item->name);
+
+
     }
 
     /**
@@ -98,5 +109,18 @@ class TransactionController extends Controller
         $transaction->delete();
 
         return redirect()->route('transactions.index')->with('status-success','Berhasil menghapus data transaksi : '.$transaction->name);
+    }
+
+    public function setStatus(Request $request, $id){
+        $request->validate([
+            'status' => 'required|in:PENDING,SUCCESS,FAILED'
+        ]);
+
+        $item = Transaction::findOrFail($id);
+        $item->transaction_status = $request->status;
+
+        $item->save();
+
+        return redirect()->route('transactions.index')->with('status-success','Berhasil merubah status '.$item->name.' menjadi '.$request->status);
     }
 }
