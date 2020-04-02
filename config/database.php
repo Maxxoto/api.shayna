@@ -2,12 +2,12 @@
 
 use Illuminate\Support\Str;
 
-$url = parse_url(getenv("DATABASE_URL"));
+// $url = parse_url(getenv("DATABASE_URL"));
 
-$host = $url["host"];
-$username = $url["user"];
-$password = $url["pass"];
-$database = substr($url["path"], 1);
+// $host = $url["host"];
+// $username = $url["user"];
+// $password = $url["pass"];
+// $database = substr($url["path"], 1);
 
 return [
 
@@ -22,7 +22,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'pgsql'),
+    'default' => env('DB_CONNECTION', 'mysql'),
 
     /*
     |--------------------------------------------------------------------------
@@ -72,16 +72,16 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
-            // 'url' => env('DATABASE_URL'),
-            // 'host' => env('DB_HOST', '127.0.0.1'),
-            'host'     => $host,
+            'url' => env('DATABASE_URL'),
+            'host' => env('DB_HOST', '127.0.0.1'),
+            // 'host'     => $host,
             'port' => env('DB_PORT', '5432'),
-            // 'database' => env('DB_DATABASE', 'forge'),
-            'database' => $database,
-            // 'username' => env('DB_USERNAME', 'forge'),
-            'username' => $username,
-            // 'password' => env('DB_PASSWORD', ''),
-            'password' => $password,
+            'database' => env('DB_DATABASE', 'forge'),
+            // 'database' => $database,
+            'username' => env('DB_USERNAME', 'forge'),
+            // 'username' => $username,
+            'password' => env('DB_PASSWORD', ''),
+            // 'password' => $password,
             'charset' => 'utf8',
             'prefix' => '',
             'prefix_indexes' => true,
